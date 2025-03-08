@@ -1,0 +1,21 @@
+Algoritmo para ver YouTube
+
+1. Inicio 
+2. Buscar la computadora   
+    1. Caminar hasta donde está la computadora
+    2. Tomar la computadora
+    3. Buscar el cargador
+    4. Tomar el cargador
+3. Abrir el navegador  
+    1. Encender el computador
+    2. Iniciar session
+    3. Mover el puntero hasta el icono del navegador
+    4. Dar doble clic sobre el icono
+4. Buscar YouTube
+    1. Colocamos el nombre de YouTube sobre la barra de búsqueda
+    2. Seleccionamos la opción de [youtube.com](http://www.youtube.com/)
+    3. Colocamos el nombre de lo que deseamos ver sobre la barra de búsqueda
+    4. Damos clic en buscar
+    5. Y se selecciona el video deseado en la lista  
+5. Fin
+
