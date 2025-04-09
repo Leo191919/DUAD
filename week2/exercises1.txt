@@ -1,0 +1,17 @@
+Ejercicio #1
+
+1. Inicio
+2. Definir `Precio de producto`
+3. Definir `Precio Final` 
+
+4. Mostrar ”Ingrese el Precio del producto”
+5. Pedir “`Precio de producto`"
+6. `Descuento#1`= 0.02
+7. `Descuento#2` =0.1
+8. Si, Precio de producto ≤ 100 hacer:
+    1. `Precio final`= `Precio de producto` - (`Precio de producto`*`Descuento#1`)
+    2. Sino, `Precio final`= `Precio de producto` - (`Precio de producto`*`Descuento#2`)
+9. Finsi
+10. Mostrar  “Su Precio final es de ”
+11. Mostrar `Precio Final`
+12. Fin
