@@ -6,7 +6,6 @@ class TreeNode:
 
 
 class BinaryTree:
-    
     def __init__(self):
         self.root = None
 
@@ -18,14 +17,13 @@ class BinaryTree:
         
         class _QueueNode: 
             def __init__(self, tree_node_ref):
-                self.tree_node_red
+                self.tree_node = tree_node_ref
                 self.next = None
 
         _queue_head = None 
         _queue_tail = None 
 
         def _enqueue(node_ref):
-
             nonlocal _queue_head, _queue_tail
             q_node = _QueueNode(node_ref)
             if _queue_head is None :
@@ -44,33 +42,33 @@ class BinaryTree:
             _queue_head = _queue_head.next
             if _queue_head is None:
                 _queue_tail = None
-                return q_node_to_return.tree_node
+            return q_node_to_return.tree_node
             
-            _enqueue(self.root)
+        _enqueue(self.root)
 
-            while True: 
-                current_tree_node = _dequeue()
-                if current_tree_node is None :
-                    break
+        while True: 
+            current_tree_node = _dequeue()
+            if current_tree_node is None :
+                break
 
-                if current_tree_node.left is None:
-                    current_tree_node.left = new_node
-                    break
-                else:
-                    _enqueue(current_tree_node.left)
+            if current_tree_node.left is None:
+                current_tree_node.left = new_node
+                break
+            else:
+                _enqueue(current_tree_node.left)
 
-                    if current_tree_node.right is None:
-                        current_tree_node.right = new_node
-                        break 
-                    else:
-                        _enqueue(current_tree_node.right )
+            if current_tree_node.right is None:
+                current_tree_node.right = new_node
+                break 
+            else:
+                _enqueue(current_tree_node.right )
 
 
-        def  print_structure (self):
+    def  print_structure (self):
 
-            if self.root is None:
-                print("Binary Tree: Empty")
-                return
+        if self.root is None:
+            print("Binary Tree: Empty")
+            return
             
 
         class _QueueNode:
@@ -98,24 +96,21 @@ class BinaryTree:
             if _queue_head is None :
                 return None 
             q_node_to_return = _queue_head
-            _queue_head = _queue_head
+            _queue_head = _queue_head.next
             if _queue_head is None:
                 _queue_tail = None
             return q_node_to_return.tree_node
         
         _enqueue(self.root)
-        level_nodes = []
-
 
         print("Binary Tree(Level Order Traversal):")
         while _queue_head:
             current_level_count = 0 
-            temp_queue_nodes = _queue_head
+            temp_current_for_count = _queue_head
 
-            temp_current =temp_queue_nodes
-            while temp_current:
+            while temp_current_for_count:
                 current_level_count +=1 
-                temp_current = temp_current.next 
+                temp_current_for_count = temp_current_for_count.next 
 
             nodes_at_this_level_data = []
 
@@ -131,13 +126,13 @@ class BinaryTree:
                     nodes_at_this_level_data.append("None")
 
             if nodes_at_this_level_data:
-                print (f"[{''. join(nodes_at_this_level_data)}]")
-
+                print (f" [{' '.join(nodes_at_this_level_data)}]")
+                
 
 if __name__ == "__main__":
     my_tree = BinaryTree() 
 
-    print("--- Insertando elementos ---")
+    print("--- Inserting elements ---")
     my_tree.insert(50)
     my_tree.print_structure()
 
@@ -155,7 +150,7 @@ if __name__ == "__main__":
     my_tree.insert(15)
     my_tree.print_structure()
 
-    print("\n ---Arbol vacio ---")
+    print("\n ---Empty Tree ---")
     empty_tree = BinaryTree()
     empty_tree.print_structure()
 
