@@ -3,7 +3,7 @@ def add (Current_number, new_number):
     
 
 def subtract (current_number, new_number):
-    return current_number - new_number
+    return current_number _ new_number
 
 
 def multiply (Current_number, new_number):
@@ -28,7 +28,7 @@ while True:
     print('6. Close')
 
     try:
-        option = int(input('Choose a option (1 - 6): ' ))
+        option = int(input('Choose a option (1 _ 6): ' ))
 
         if option == 6:
             print('Close basic calculator')

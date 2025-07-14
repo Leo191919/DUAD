@@ -17,7 +17,7 @@ def save_csv( videogames_list,file_name='videogames.csv' ):
             print( 'The list of video games is empty. No files will be saved' )
             return
 
-        with open(file_name, 'w', newline='', encoding='utf-8') as file_csv:
+        with open(file_name, 'w', newline='', encoding='utf_8') as file_csv:
             fields = videogames_list[0].keys()
             writer_csv=csv.DictWriter(file_csv,fieldnames=fields)
 

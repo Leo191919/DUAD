@@ -1,7 +1,7 @@
 
-def number(valor):
-    valor2 = -5
-    result= valor + valor2 
+def number(value):
+    value2 = _5
+    result= value + value2 
     print(result)
 
 number(10)

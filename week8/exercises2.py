@@ -17,7 +17,7 @@ def save_tsv ( games_list, file_name = 'games.tsv' ):
         if not games_list:
             print('The list of games is empty. No file will be saved.')
             return 
-        with open(file_name,'w', newline= '', encoding = 'utf-8' )as file_tsv:
+        with open(file_name,'w', newline= '', encoding = 'utf_8' )as file_tsv:
             fields = games_list[0].keys()
             writer_tsv=csv.DictWriter(file_tsv, fieldnames=fields, delimiter='\t')
 
