@@ -1,0 +1,179 @@
+import datetime
+import json
+
+class Movement:
+    def __init__(self, type, amount, description, date, category):
+        if type.lower() not in ['income', 'expense']:
+            raise ValueError(f"Invalid movement type. Valid type are: 'income' or 'expense', but got '{type}'.")
+
+        if not isinstance(amount, (int, float)) or amount <= 0:
+            raise ValueError(f"Amount must be a positive number. Got:{amount} ")
+
+
+        try:
+            datetime.datetime.strptime(date, '%Y-%m-%d')
+        except ValueError:
+            raise ValueError(f"Invalid date format. Use YYYY-MM-DD. Got: {date}")
+
+        self.type = type.lower()
+        self.amount = float(amount)
+        self.description = description
+        self.date = date
+        self.category = category
+        
+        
+    def get_details(self):
+        return f"Type:{self.type.capitalize()}, Amount:{self.amount:.2f}, Description: {self.description}, Date: {self.date}, Category: {self.category}"
+    
+    def __str__(self):
+        return self.get_details()
+    
+    
+    def to_dict(self):
+        return{
+            "type": self.type,
+            "amount": self.amount,
+            "description" : self.description,
+            "date": self.date,
+            "category": self.category 
+        }
+    
+    
+class Finance_manager:
+    def __init__(self, filename = 'movements.json'):
+
+        self.movements = []
+        self.filename = filename
+        self.load_data()
+
+
+    def add_movement(self, type_param, amount_param, description_param, date_param, category_param):
+
+        try:  
+            new_movement = Movement(type_param, amount_param, description_param, date_param, category_param)
+            self.movements.append(new_movement)
+            self.save_data()
+            return True
+
+        except ValueError as e:
+            print(f"Error adding movement: {e}")
+            return False 
+        
+
+    def remove_movement(self, index_to_remove):
+        if 0<= index_to_remove< len(self.movements):
+            del self.movements[index_to_remove]
+            self.save_data()
+            return True
+        return False        
+
+
+    def edit_movement(self,index, type_param, amount_param, description_param, date_param, category_param):
+        if 0 <= index < len(self.movements):
+            try:
+                update_movement = Movement(type_param, amount_param, description_param,date_param, category_param)
+                self.movements[index] = update_movement 
+                self.save_data()
+                return True
+            except ValueError as e :
+                print(f"Error editing movement: {e}")
+                return False
+        return False
+    
+
+    def calculate_total_balance(self):
+
+        total_balance = 0
+        for mov in self.movements:
+            if mov.type == "income":
+                total_balance += mov.amount
+            elif mov.type == "expense":
+                total_balance -= mov.amount
+        return total_balance
+
+    
+    def save_data(self):
+        data_to_save = [mov.to_dict() for mov in self.movements]
+        try: 
+            with open(self.filename, "w") as f:
+                json.dump(data_to_save, f, indent = 4)
+
+        except IOError as e:
+            print(f"Error saving data to {self.filename}: {e}")
+
+    
+    def load_data(self):
+        self.movements = []
+        try: 
+            with open(self.filename, 'r') as f:
+                loaded_data = json.load(f)
+                for item in loaded_data:
+                    try:
+                        self.movements.append(Movement(
+                            item['type'],
+                            item['amount'],
+                            item['description'],
+                            item['date'],
+                            item['category']
+                        ))
+                    except (ValueError, KeyError) as e :
+                        print(f"Skipping invalid movement data during load:{item} - Error {e}")
+        except FileNotFoundError:
+            print ("No existing  data file '{self.filename}' found. Starting with empty movements.")
+        except  json.JSONDecodeError as e:
+            print(f"Error reading JSON from '{self.filename}' : {e}. File might be corrupted.")
+        except IOError as e:
+            print(f"Error loading data from {self.filename} : {e}")
+
+
+
+
+if __name__== "__main__":
+    print("--- Initialized test of Finances Managed -- ")
+
+    my_manager = Finance_manager()
+    print("\nTry to add a movement with positive amount")
+
+    my_manager.add_movement("income", 100, "Salary", "2025-10-01", "Job")
+    my_manager.add_movement("income", 50, "Groceries", "2025-10-02", "Extra")
+
+
+
+    print("\nTry to add a movement with negative amount")
+
+    my_manager.add_movement("expense", 30.50, "Salary", "2025-10-01", "Job")
+    my_manager.add_movement("expense", 75.00, "Groceries", "2025-10-02", "Extra")
+
+    print("\n Try to add a movement with invalid amount")
+    my_manager.add_movement("expense", -10, "Salary", "2025-10-01", "Job")
+    my_manager.add_movement("expense", 0, "Groceries", "2025-10-02", "Extra")
+
+    print("\nTry to add a movement with invalid amount(negative/zero)")
+    my_manager.add_movement("expense", -10, "Invalid Amount test", "2025-10-01", "test" ) 
+    my_manager.add_movement("expense", 0, "zero Amount Test", "2025/10/04", "Test")
+
+
+    print(f"\nNumber total of movements registered: {len(my_manager.movements)}")
+
+    print("\nDetails of movements registered:")
+    for mov in my_manager.movements:
+        print(mov.get_details())
+
+    total_balance = my_manager.calculate_total_balance()
+    print(f"\nTotal balance: {total_balance:.2f}")
+
+    if len(my_manager.movements)> 0 : 
+        print (f"\nRemoving movement at index 0:{my_manager.movements[0].get_details()}")
+        if my_manager.remove_movement (0):
+            print("Movement removed successfully!")
+        else: 
+            print("Failed to removed movement.")
+    else: 
+        print("\nNo movement to remove.")
+
+    print (f"\nTotal number of movements after removal:{len (my_manager.movements)}")
+    print(f"New total balance: {my_manager.calculate_total_balance():.2f}")
+
+
+
+    print("\n--- End of test ---")
