@@ -1,0 +1,12 @@
+**Ejercicio #2**
+
+1. Inicio
+2. Definir `Tiempo`
+3. Definir `Resultado`
+4. Mostrar “Por favor, indique la cantidad de tiempo en segundos”
+5. Pedir `Tiempo`
+6. Si, (`Tiempo` < 600) entonces:
+    1. `Resultado`=600 -`Tiempo`
+    2. Mostrar `Resultado` ”Segundos" 
+    3. Sino, Mostrar ” Mayor”
+7. Fin
