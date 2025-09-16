@@ -1,0 +1,156 @@
+[
+    {
+        "type": "expense",
+        "amount": 200.0,
+        "description": "Rent",
+        "date": "2025-10-05",
+        "category": "Housing"
+    },
+    {
+        "type": "expense",
+        "amount": 30.0,
+        "description": "Groceries",
+        "date": "2025-10-02",
+        "category": "Food"
+    },
+    {
+        "type": "income",
+        "amount": 50.0,
+        "description": "Gift",
+        "date": "2025-10-03",
+        "category": "Other"
+    },
+    {
+        "type": "income",
+        "amount": 100.0,
+        "description": "Salary",
+        "date": "2025-10-01",
+        "category": "Job"
+    },
+    {
+        "type": "income",
+        "amount": 100.0,
+        "description": "Salary",
+        "date": "2025-10-01",
+        "category": "Job"
+    },
+    {
+        "type": "income",
+        "amount": 100.0,
+        "description": "Salary",
+        "date": "2025-10-01",
+        "category": "Job"
+    },
+    {
+        "type": "income",
+        "amount": 100.0,
+        "description": "Salary",
+        "date": "2025-10-01",
+        "category": "Job"
+    },
+    {
+        "type": "expense",
+        "amount": 30.0,
+        "description": "Groceries",
+        "date": "2025-10-02",
+        "category": "Food"
+    },
+    {
+        "type": "income",
+        "amount": 50.0,
+        "description": "Gift",
+        "date": "2025-10-03",
+        "category": "Other"
+    },
+    {
+        "type": "income",
+        "amount": 100.0,
+        "description": "Salary",
+        "date": "2025-10-01",
+        "category": "Job"
+    },
+    {
+        "type": "income",
+        "amount": 100.0,
+        "description": "Salary",
+        "date": "2025-10-01",
+        "category": "Job"
+    },
+    {
+        "type": "income",
+        "amount": 100.0,
+        "description": "Salary",
+        "date": "2025-10-01",
+        "category": "Job"
+    },
+    {
+        "type": "expense",
+        "amount": 30.0,
+        "description": "Groceries",
+        "date": "2025-10-02",
+        "category": "Food"
+    },
+    {
+        "type": "income",
+        "amount": 50.0,
+        "description": "Gift",
+        "date": "2025-10-03",
+        "category": "Other"
+    },
+    {
+        "type": "income",
+        "amount": 100.0,
+        "description": "Salary",
+        "date": "2025-10-01",
+        "category": "Job"
+    },
+    {
+        "type": "income",
+        "amount": 100.0,
+        "description": "Salary",
+        "date": "2025-10-01",
+        "category": "Job"
+    },
+    {
+        "type": "income",
+        "amount": 100.0,
+        "description": "Salary",
+        "date": "2025-10-01",
+        "category": "Job"
+    },
+    {
+        "type": "income",
+        "amount": 50.0,
+        "description": "Gift",
+        "date": "2025-10-03",
+        "category": "Other"
+    },
+    {
+        "type": "income",
+        "amount": 100.0,
+        "description": "Salary",
+        "date": "2025-10-01",
+        "category": "Job"
+    },
+    {
+        "type": "income",
+        "amount": 100.0,
+        "description": "Salary",
+        "date": "2025-10-01",
+        "category": "Job"
+    },
+    {
+        "type": "income",
+        "amount": 100.0,
+        "description": "Salary",
+        "date": "2025-10-01",
+        "category": "Job"
+    },
+    {
+        "type": "expense",
+        "amount": 1000.0,
+        "description": "salary",
+        "date": "2025-08-05",
+        "category": ""
+    }
+]

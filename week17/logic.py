@@ -1,5 +1,7 @@
 import datetime
-import json
+from category_manager import CategoryManager
+from movement_persistence import save_movements, load_movements
+
 
 class Movement:
     def __init__(self, type, amount, description, date, category):
@@ -41,13 +43,16 @@ class Movement:
     
 class Finance_manager:
     def __init__(self, filename = 'movements.json'):
-
+        self.category_manager = CategoryManager()
         self.movements = []
         self.filename = filename
         self.load_data()
 
 
     def add_movement(self, type_param, amount_param, description_param, date_param, category_param):
+
+        if category_param not in self.category_manager.get_categories():
+            return False
 
         try:  
             new_movement = Movement(type_param, amount_param, description_param, date_param, category_param)
@@ -69,6 +74,9 @@ class Finance_manager:
 
 
     def edit_movement(self,index, type_param, amount_param, description_param, date_param, category_param):
+        if category_param not in self.category_manager.get_categories():
+            return False
+        
         if 0 <= index < len(self.movements):
             try:
                 update_movement = Movement(type_param, amount_param, description_param,date_param, category_param)
@@ -94,39 +102,23 @@ class Finance_manager:
     
     def save_data(self):
         data_to_save = [mov.to_dict() for mov in self.movements]
-        try: 
-            with open(self.filename, "w") as f:
-                json.dump(data_to_save, f, indent = 4)
+        save_movements(self.filename, data_to_save)
 
-        except IOError as e:
-            print(f"Error saving data to {self.filename}: {e}")
 
-    
     def load_data(self):
+        loaded_data = load_movements(self.filename)
         self.movements = []
-        try: 
-            with open(self.filename, 'r') as f:
-                loaded_data = json.load(f)
-                for item in loaded_data:
-                    try:
-                        self.movements.append(Movement(
-                            item['type'],
-                            item['amount'],
-                            item['description'],
-                            item['date'],
-                            item['category']
-                        ))
-                    except (ValueError, KeyError) as e :
-                        print(f"Skipping invalid movement data during load:{item} - Error {e}")
-        except FileNotFoundError:
-            print ("No existing  data file '{self.filename}' found. Starting with empty movements.")
-        except  json.JSONDecodeError as e:
-            print(f"Error reading JSON from '{self.filename}' : {e}. File might be corrupted.")
-        except IOError as e:
-            print(f"Error loading data from {self.filename} : {e}")
-
-
-
+        for item in loaded_data:
+            try: 
+                self.movements.append(Movement(
+                item['type'],
+                item['amount'],
+                item['description'],
+                item['date'],
+                item['category']
+                ))
+            except (ValueError, KeyError) as e :
+                print(f"Skipping invalid movement data during load:{item} - Error {e}")   
 
 if __name__== "__main__":
     print("--- Initialized test of Finances Managed -- ")
