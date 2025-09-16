@@ -1,11 +1,13 @@
 import FreeSimpleGUI as sg
-from logic import my_manager
+from logic import Finance_manager
 from interfaces import(
     add_movement_window,
     edit_movement_window,
-    get_movements_for_table,
     update_main_display
 )
+
+my_manager = Finance_manager()
+
 
 layout = [
     [sg.Button('Add Income', key='-ADD_INCOME_BTN-'),
@@ -36,12 +38,8 @@ while True:
         my_manager.save_data()
         break
     elif event == '-ADD_INCOME_BTN-':
-        data_movement= add_movement_window(my_manager, 'Income')
+        data_movement= add_movement_window(my_manager, 'income')
         if data_movement:
-            if data_movement['amount']<=0:
-                sg.popup.error('Amount must be positive number greater than zero')
-                continue
-
             if my_manager.add_movement(
                 data_movement['kind'],
                 data_movement['amount'],
@@ -82,8 +80,7 @@ while True:
             sg.popup('Please select a movement from the table to remove.')
         else: 
             index_to_delete = selected_rows_indices[0]
-            confirm = sg.popup_yes_no(
-                f'Are you sure you want to delete the selected movement(row {index_to_delete + 1})?')
+            confirm = sg.popup_yes_no( f'Are you sure you want to delete the selected movement(row {index_to_delete + 1})?')
             if confirm == 'Yes':
                 if my_manager.remove_movement(index_to_delete):
                     sg.popup_ok('Movement removed successfully.')

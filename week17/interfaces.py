@@ -2,6 +2,7 @@ import FreeSimpleGUI as sg
 from datetime import datetime
 from logic import Finance_manager
 
+
 def manage_categories_window(manager):
     layout_manage_categories = [
         [sg.Text("Add New Category:")],
@@ -55,7 +56,7 @@ def add_movement_window(manager, kind = "income"):
         [sg.Text("Category")],
         [sg.Combo(manager.category_manager.get_categories(), key = "-CATEGORY_INPUT-", readonly = True)],
         [sg.Button("Manage Categories", key = "-MANAGE_CATEGORIES_BTN-")],
-        [sg.Button("Add", key = "-ADD_MOVEMENT_BTN-"), sg.Button("Cancel", key ="-CANCEL_BTN-")]
+        [sg.Button("Add", key = "-ADD_MOVEMENT_BTN-"), sg.Button("Cancel", key ="-CANCEL_BTN-")],
         ]
 
     emergent_window = sg.Window("Add New Movement", layout_add_movement)
@@ -92,15 +93,15 @@ def add_movement_window(manager, kind = "income"):
 
             kind_movement = "income" if values_emergent['-KIND_INCOME-'] else "expense"            
 
-            data_movement =  { 
+            data_movement = { 
                 "kind": kind_movement,
                 "amount": amount_movement,
                 "description": description,
                 "date": date,
-                "category": category
+                "category": category,
             }
-        emergent_window.close()
-    return data_movement
+            emergent_window.close()
+            return data_movement
     
     emergent_window.close()
     return None
@@ -124,9 +125,9 @@ def edit_movement_window(manager,movement_data):
         [sg.Text("Description:")],
         [sg.Input(default_text=movement_data['description'], key= '-DESCRIPTION_INPUT-' )],
 
-        [sg.Text("Date ( YYYY-MM-DD ):")],
+        [sg.Text("Date (YYYY-MM-DD):")],
         [sg.Input(default_text=movement_data['date'], key = '-DATE_INPUT-', size=(12,1), disabled = True),
-        sg.CalendarButton("Choose Date", target = "-DATE_INPUT-", format =" %Y-%m-%d")],
+        sg.CalendarButton("Choose Date", target = "-DATE_INPUT-", format ="%Y-%m-%d")],
         
         [sg.Text("Category")],
         [sg.Combo(manager.category_manager.get_categories(), key = "-CATEGORY_INPUT-", readonly =  True,
@@ -171,6 +172,7 @@ def edit_movement_window(manager,movement_data):
                 "description": values_emergent['-DESCRIPTION_INPUT-'],
                 "date" : values_emergent['-DATE_INPUT-'],
                 "category" : values_emergent['-CATEGORY_INPUT-']
+                            
             }
             break
 
