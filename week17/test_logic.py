@@ -5,15 +5,26 @@ import os
 
 @pytest.fixture
 def finance_manager_setup():
-    filename= "test_movements.json"
-    if os.path.exists(filename):
-        os.remove(filename)
+    filename_movements= "test_movements.json"
+    filename_categories= "test_categories.json"
+    if os.path.exists(filename_movements):
+        os.remove(filename_movements)
 
-    manager = Finance_manager(filename)
+
+
+
+    manager = Finance_manager(filename= filename_movements)
+
+    manager.category_manager.add_category("Job")
+    manager.category_manager.add_category("Food")
+    manager.category_manager.add_category("Other")
+    manager.category_manager.add_category("Housing")
+    manager.category_manager.add_category("Test")
+
     yield manager 
 
-    if os.path.exists(filename):
-        os.remove(filename)
+    if os.path.exists(filename_movements):
+        os.remove(filename_movements)
 
 def test_add_movement_valid(finance_manager_setup):
     manager = finance_manager_setup
@@ -33,10 +44,10 @@ def test_add_movement_invalid_date(finance_manager_setup):
     assert not manager.add_movement("income", 200, "Gift", "2025/10/03", "Other")
     assert len (manager.movements)==0
 
-def test_add_movement_invalid_type(finance_manager_setup):
+def test_add_movement_invalid_kind(finance_manager_setup):
 
     manager = finance_manager_setup
-    assert not manager.add_movement("invalid_type", 10, "Test", "2025-10-01", "Test")
+    assert not manager.add_movement("invalid_kind", 10, "Test", "2025-10-01", "Test")
     assert len(manager.movements) == 0 
     
 

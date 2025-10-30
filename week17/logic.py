@@ -4,9 +4,9 @@ from movement_persistence import save_movements, load_movements
 
 
 class Movement:
-    def __init__(self, type, amount, description, date, category):
-        if type.lower() not in ['income', 'expense']:
-            raise ValueError(f"Invalid movement type. Valid type are: 'income' or 'expense', but got '{type}'.")
+    def __init__(self, kind, amount, description, date, category):
+        if kind.lower() not in ['income', 'expense']:
+            raise ValueError(f"Invalid movement kind. Valid kind are: 'income' or 'expense', but got '{kind}'.")
 
         if not isinstance(amount, (int, float)) or amount <= 0:
             raise ValueError(f"Amount must be a positive number. Got:{amount} ")
@@ -17,7 +17,7 @@ class Movement:
         except ValueError:
             raise ValueError(f"Invalid date format. Use YYYY-MM-DD. Got: {date}")
 
-        self.type = type.lower()
+        self.kind = kind.lower()
         self.amount = float(amount)
         self.description = description
         self.date = date
@@ -25,7 +25,7 @@ class Movement:
         
         
     def get_details(self):
-        return f"Type:{self.type.capitalize()}, Amount:{self.amount:.2f}, Description: {self.description}, Date: {self.date}, Category: {self.category}"
+        return f"kind:{self.kind.capitalize()}, Amount:{self.amount:.2f}, Description: {self.description}, Date: {self.date}, Category: {self.category}"
     
     def __str__(self):
         return self.get_details()
@@ -33,7 +33,7 @@ class Movement:
     
     def to_dict(self):
         return{
-            "type": self.type,
+            "kind": self.kind,
             "amount": self.amount,
             "description" : self.description,
             "date": self.date,
@@ -49,13 +49,14 @@ class Finance_manager:
         self.load_data()
 
 
-    def add_movement(self, type_param, amount_param, description_param, date_param, category_param):
+    def add_movement(self, kind_param, amount_param, description_param, date_param, category_param):
 
-        if category_param not in self.category_manager.get_categories():
-            return False
+        try:
+            new_movement = Movement(kind_param, amount_param, description_param, date_param, category_param)
 
-        try:  
-            new_movement = Movement(type_param, amount_param, description_param, date_param, category_param)
+            if category_param not in self.category_manager.get_categories():
+                raise ValueError('Category not found in manager.')
+                
             self.movements.append(new_movement)
             self.save_data()
             return True
@@ -73,13 +74,17 @@ class Finance_manager:
         return False        
 
 
-    def edit_movement(self,index, type_param, amount_param, description_param, date_param, category_param):
+    def edit_movement(self,index, kind_param, amount_param, description_param, date_param, category_param):
+        print(f"Editing movement at index: {index}")
+        print(f"New data: kind = {kind_param}, amount = {amount_param}, description = {description_param}, date = {date_param}, category = {category_param}")   
+        
         if category_param not in self.category_manager.get_categories():
+            print(f"Error: Category not found")
             return False
         
         if 0 <= index < len(self.movements):
             try:
-                update_movement = Movement(type_param, amount_param, description_param,date_param, category_param)
+                update_movement = Movement(kind_param, amount_param, description_param,date_param, category_param)
                 self.movements[index] = update_movement 
                 self.save_data()
                 return True
@@ -93,9 +98,9 @@ class Finance_manager:
 
         total_balance = 0
         for mov in self.movements:
-            if mov.type == "income":
+            if mov.kind == "income":
                 total_balance += mov.amount
-            elif mov.type == "expense":
+            elif mov.kind == "expense":
                 total_balance -= mov.amount
         return total_balance
 
@@ -111,7 +116,7 @@ class Finance_manager:
         for item in loaded_data:
             try: 
                 self.movements.append(Movement(
-                item['type'],
+                item['kind'],
                 item['amount'],
                 item['description'],
                 item['date'],
@@ -119,6 +124,8 @@ class Finance_manager:
                 ))
             except (ValueError, KeyError) as e :
                 print(f"Skipping invalid movement data during load:{item} - Error {e}")   
+
+my_manager = Finance_manager()
 
 if __name__== "__main__":
     print("--- Initialized test of Finances Managed -- ")
