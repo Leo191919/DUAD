@@ -1,0 +1,48 @@
+Algoritmos de Rutina Diaria
+
+1. Inicio 
+
+2. Me alisto para trabajar
+    1. Me despierto
+    2. Tomo una ducha
+    3. Me visto
+    4. Me peino
+    5. Camino de vuelta a mi habitación
+    6. Me pongo perfume 
+3. Salgo a trabajar
+    1. Tomo las llaves de mi carro
+    2. Salgo de casa
+    3. Me siento en el carro
+    4. Saco el carro de la cochera
+    5. Busco la aplicación de Uber
+    6. Inicio la aplicación
+    7. Si recibo viaje evaluó ciertos requisitos para decir si es bueno o malo
+    8. Si no, pasa los requisitos,
+        1. se rechaza
+    9. Si se acepta, se completa.  
+4. descanso de medio día
+    1. Hago ejercicio
+    2. Me alisto nuevamente para salir a trabajar
+    3. Almuerzo
+    4. Si no, hay nada urgente que hacer en casa, salgo a trabajar nuevamente
+5. trabajo nuevamente
+    1. Tomo las llaves de mi carro
+    2. Salgo de casa
+    3. Me siento sobre el carro
+    4. Saco el carro de la cochera
+    5. Busco la aplicación de Uber
+    6. Inicio la aplicación
+    7. Si recibo viaje evaluó ciertos requisitos para decir,
+        1. sí cumple los requisitos se acepta
+        2. Si no, cumple los requisitos, se rechaza
+    8. Si, se acepta, se completa. 
+6. Llego a la casa
+    1. Guardo el carro
+    2. Busco algo de comer en casa
+    3. Hablo unos minutos con mi familia
+    4. Si tengo pendientes de estudio, estudio.
+    5. Si no, tengo que trabajar en reparaciones de equipos de clientes, hago pendientes
+    6. Si no, tengo nada más pendiente, descanso,
+    7. Me acuesto a dormir
+    
+7. Fins

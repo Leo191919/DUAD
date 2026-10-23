@@ -1,0 +1,21 @@
+**Ejercicio#4**
+
+1. Inicio
+2. Definir `A`
+3. Definir `B`
+4. Definir `Numero1`
+5. Definir `Numero2` 
+6. Mostrar “ Por favor, ingrese los dos numeros.”
+7. Pedir `Numero1`
+8. Pedir `Numero2`
+9. Si `Numero1`>`Numero2` entonces:
+    1. A=`Numero2`
+    2. B=`Numero1`
+    3. Sino, B=`Numero2` 
+    4. A=`Numero1`
+    
+10. Mostrar “El numero menos es “
+11. Mostrar `A` 
+12. Mostrar `B`
+
+1. Fin
