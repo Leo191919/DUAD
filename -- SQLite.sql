@@ -1,4 +1,6 @@
 -- SQLite
+PRAGMA foreign_keys=ON;
+
 CREATE TABLE users (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     full_name TEXT NOT NULL,
@@ -26,16 +28,16 @@ CREATE TABLE invoices(
     id INTEGER PRIMARY KEY AUTOINCREMENT,  
     purchase_date TEXT DEFAULT CURRENT_TIMESTAMP,
     total_amount REAL NOT NULL, 
-    user_id INTEGER,
-    payment_method_id INTEGER,
+    user_id INTEGER NOT NULL,
+    payment_method_id INTEGER NOT NULL,
     FOREIGN KEY (user_id) REFERENCES users(id),
     FOREIGN KEY (payment_method_id) REFERENCES payment_methods(id)
     );
 
 CREATE TABLE invoice_items ( 
     id INTEGER PRIMARY KEY AUTOINCREMENT,
-    invoice_id INTEGER, 
-    product_id INTEGER, 
+    invoice_id INTEGER NOT NULL, 
+    product_id INTEGER NOT NULL, 
     quantity INTEGER NOT NULL, 
     total_amount REAL NOT NULL, 
     FOREIGN KEY (invoice_id) REFERENCES invoices(id),
@@ -71,35 +73,8 @@ CREATE TABLE reviews (
   Limitation:SQLite includes foreign key contraint syntax, but foreign key enforcement is disable by default for backward compatibility.
   Solution:Expressed all relationship  explicitly using FOREIGN KEY (...). Enforce them in runtime session by executing Pragma foreign_keys=ON;.*/
   
-ALTER TABLE invoices ADD COLUMN boyer_phone TEXT;
+ALTER TABLE invoices ADD COLUMN buyer_phone TEXT;
 ALTER TABLE invoices ADD COLUMN employee_code TEXT;
-
-
-SELECT * FROM products;
-
-SELECT * FROM products
-WHERE price > 50000;
-
-
-SELECT * FROM invoice_items
-WHERE product_id = 1;
-
-SELECT product_id,
-    SUM(quantity) AS total_quantity_sold,
-    SUM(total_amount) AS total_revenue)
-
-FROM invoice_items
-GROUP BY product_id;
-
-SELECT * FROM invoices 
-WHERE  user_id = 1;
-
-SELECT * FROM invoices 
-ORDER BY total_amount DESC;
-
-SELECT * FROM invoices 
-WHERE id = 1;
-
 
 INSERT INTO users (full_name, email) VALUES ('Ana Gomez', 'ana@email.com'); 
 
@@ -115,3 +90,27 @@ INSERT INTO invoice_items (invoice_id, product_id, quantity, total_amount)
 VALUES (1,1,1, 75500.00);
 
 
+SELECT * FROM products;
+
+SELECT * FROM products
+WHERE price > 50000;
+
+
+SELECT * FROM invoice_items
+WHERE product_id = 1;
+
+SELECT product_id,
+    SUM(quantity) AS total_quantity_sold,
+    SUM(total_amount) AS total_revenue
+
+FROM invoice_items
+GROUP BY product_id;
+
+SELECT * FROM invoices 
+WHERE  user_id = 1;
+
+SELECT * FROM invoices 
+ORDER BY total_amount DESC;
+
+SELECT * FROM invoices 
+WHERE id = 1;
