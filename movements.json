@@ -1,0 +1,70 @@
+{
+    "movements": [
+        {
+            "kind": "expense",
+            "amount": 30.0,
+            "description": "Groceries",
+            "date": "2025-10-02",
+            "category": "Food"
+        },
+        {
+            "kind": "income",
+            "amount": 790.0,
+            "description": "Gift",
+            "date": "2025-10-02",
+            "category": "Other"
+        },
+        {
+            "kind": "expense",
+            "amount": 30.0,
+            "description": "Groceries",
+            "date": "2025-10-02",
+            "category": "Food"
+        },
+        {
+            "kind": "expense",
+            "amount": 30.0,
+            "description": "Groceries",
+            "date": "2025-10-02",
+            "category": "Food"
+        },
+        {
+            "kind": "income",
+            "amount": 100.0,
+            "description": "Salary",
+            "date": "2025-10-01",
+            "category": "Job"
+        },
+        {
+            "kind": "income",
+            "amount": 100.0,
+            "description": "Salary",
+            "date": "2025-10-01",
+            "category": "Job"
+        },
+        {
+            "kind": "income",
+            "amount": 100.0,
+            "description": "Salary",
+            "date": "2025-10-01",
+            "category": "Job"
+        },
+        {
+            "kind": "expense",
+            "amount": 1000.0,
+            "description": "salary",
+            "date": "2025-08-05",
+            "category": ""
+        }
+    ],
+    "categories": [
+        "Food",
+        "General",
+        "Job",
+        "Other",
+        "Rent",
+        "Transport",
+        "Utilities",
+        "save"
+    ]
+}
