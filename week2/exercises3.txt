@@ -1,0 +1,15 @@
+**Ejercicio #3**
+
+1. Inicio
+2. Definir `Numero`
+3. Mostrar “ Por favor, ingrese el numero”
+4. Perdir `Numero` 
+5. `Contador1` = 0
+6. `Contador2`=1
+7. Si `Contador2` ≤ `Numero` entonces :
+    1. `Contador1`= `Contador1` + `Contador2`
+    2. `Contador2`= `Contador2` + 1
+8. Mostrar  ”La suma del numero es:
+9. Mostrar `contador1`
+
+10. Fin
